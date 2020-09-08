@@ -1,0 +1,23 @@
+
+.img-smaller{
+	width: 30rem;
+}
+#login-body{
+	width: 95%;
+	background: #000;
+	font-family: Arial	;
+}
+#login-form{
+	width: 30%;
+	margin: 0px auto;
+}
+.white-text{
+	color: white;
+	padding-top: 3rem;
+	padding-bottom: 1.5rem;
+	font-weight: bold;
+}
+.rounded{
+	/*border-radius: 3rem;*/
+	border-radius: 2rem;
+}
