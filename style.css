@@ -9,6 +9,7 @@
 }
 #login-form{
 	width: 30%;
+	height: 50vh;
 	margin: 0px auto;
 }
 .white-text{
@@ -17,7 +18,29 @@
 	padding-bottom: 1.5rem;
 	font-weight: bold;
 }
-.rounded{
-	/*border-radius: 3rem;*/
+/*.test-text{
+	line-height: 3rem !important;
+	border-radius: 4rem;
+	width: 100%;
+}*/
+	
+.round-2{
 	border-radius: 2rem;
+}
+#login-form input{
+	border-radius: 2rem;
+}
+.light-text{
+	color: #aaa;
+	font-size: .8rem;
+}
+.remember-text{
+	font-size: .8rem;
+}
+#submit-btn{
+	/*margin: 2rem;*/
+	/*margin-bottom: 2rem;
+	margin-top: 2rem;*/
+	border-radius: 1rem;
+	font-weight: bold;
 }
