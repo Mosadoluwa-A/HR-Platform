@@ -2,6 +2,13 @@
 .img-smaller{
 	width: 30rem;
 }
+.nav-img{
+	width: 20rem;
+}
+.navbar-nav > li{
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
 #login-body{
 	width: 95%;
 	background: #000;
