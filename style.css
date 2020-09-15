@@ -5,6 +5,16 @@
 .nav-img{
 	width: 20rem;
 }
+.card-image{
+	width: 6rem;
+	margin-left: 10rem;
+}
+.user-img{
+	width: 5.9rem;
+	margin-left: 10rem;
+	background-color: white;
+	border-radius: 50%;
+}
 .navbar-nav > li{
 	padding-left: 2rem;
 	padding-right: 2rem;
