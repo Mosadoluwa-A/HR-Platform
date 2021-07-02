@@ -38,6 +38,12 @@
 	padding-bottom: 1.5rem;
 	font-weight: bold;
 }
+.red-text{
+	color: red;
+}
+.nav-link > strong:hover{
+	color: red;!important
+}
 /*.test-text{
 	line-height: 3rem !important;
 	border-radius: 4rem;
@@ -50,6 +56,9 @@
 .red-button{
 	background-color: red;
 	color: white;
+}
+.red-background{
+	background-color: red;
 }
 #login-form input{
 	border-radius: 2rem;
