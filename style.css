@@ -29,6 +29,9 @@
 	height: 50vh;
 	margin: 0px auto;
 }
+.form-group > input::placeholder{
+		font-size: .8rem;
+}
 .white-text{
 	color: white;
 	padding-top: 3rem;
@@ -43,6 +46,10 @@
 	
 .round-2{
 	border-radius: 2rem;
+}
+.red-button{
+	background-color: red;
+	color: white;
 }
 #login-form input{
 	border-radius: 2rem;
