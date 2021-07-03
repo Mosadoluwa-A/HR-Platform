@@ -76,7 +76,8 @@
 	color: white;
 }
 .red-background{
-	background-color: red;
+	background-color: #f02;
+	cursor: pointer;
 }
 #login-form input{
 	border-radius: 2rem;
@@ -122,4 +123,25 @@
 .smaller-focus-body > ul{
 	list-style: none;
 	font-size: 1rem;
+}
+.dept-flex{
+	height: 100vh;
+}
+.dept-focus{
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1.5rem;
+	background-color: black;
+	color: white;
+	height: 13rem;
+	width: 13rem;
+	border-radius: .5rem;
+}
+.dept-focus > h4{
+	align-self: center;
+}
+.dept-focus > small{
+	align-self: center;
 }
