@@ -145,3 +145,29 @@
 .dept-focus > small{
 	align-self: center;
 }
+.donor-flex{
+	height: 80vh;
+}
+.donor-focus{
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1.5rem;
+	background-color: black;
+	color: black;
+	height: 13rem;
+	width: 13rem;
+	border-radius: 10rem;
+}
+.donor-focus > h4{
+	align-self: center;
+	background-color: white;
+	padding: .5rem;
+	border-radius: .2rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.donor-focus > small{
+	align-self: center;
+}
