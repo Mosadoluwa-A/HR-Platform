@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Employees</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" type="image/x-icon" href="Images/DFB-Favicon.png">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a href="#" class="navbar-brand"><img src="Images/LOGO-AD-EN.jpg" class="nav-img"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navStuff">
+			<a href="#" class="navbar-toggler-icon"></a>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navStuff">
+			<ul class="navbar-nav ml-5">
+				<li class="nav-item active">
+					<a href="home.html" class="nav-link"><strong class="red-text">EMPLOYEES</strong></a>		
+				</li>
+				<li class="nav-item">
+					<a href="departments.html" class="nav-link"><strong>DEPARTMENTS</strong></a>
+				</li>
+				<li class="nav-item">
+					<a href="donor.html" class="nav-link"><strong>DONORS</strong></a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link"><strong>LOG OUT</strong></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<div id="main">
+		<div class="add-stuff-form mt-2 mb-3">
+	        <form>
+	            <h2 class="text-center">Add Employee</h2>
+	            <div class="form-row">
+	            	<div class="form-group col-md-4">
+	                	<input type="text" placeholder="Name" class="form-control" required="required" name="name">
+	            	</div>
+	            	<div class="form-group col-md-4">
+	                	<input type="email" placeholder="Email" class="form-control" required="required" name="email">
+	            	</div>
+	            	<div class="form-group col-md-4">
+	                	<input type="number" placeholder="Phone" class="form-control" required="required" name="phone_no">
+	            	</div>
+	            	<div class="custom-file mb-3 col-md-4">
+			            <input type="file" class="custom-file-input" id="image" name="image" required>
+			            <label class="custom-file-label" for="image">Choose Image...</label>
+	              	</div>
+	            	 <div class="form-group col-md-4">
+		                <select class="form-control" name="gender">
+		                    <option>Gender</option>
+		                    <option value="Male">Male</option>
+		                    <option value="Female">Female</option>
+		                </select>
+	            	</div>
+
+	            	<div class="form-group col-md-4">
+	                	<input type="text" placeholder="Address" class="form-control" required="required" name="address">
+	            	</div>
+	            	<div class="form-group col-md-4">
+		                <select class="form-control" name="nationality">
+		                    <option>Nationality</option>
+		                    <option value="Nigeria">Nigeria</option>
+		                    <option value="Togo">Togo</option>
+		                    <option value="Ghana">Ghana</option>
+		                    <option value="Kenya">Kenya</option>
+		                </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+	                	<input type="text" placeholder="State of Origin" class="form-control" required="required" name="state_of_origin">
+	            	</div>
+	            	<div class="form-group col-md-4">
+		                <select class="form-control" name="marital_status">
+		                    <option>Marital Status</option>
+		                    <option value="Single">Single</option>
+		                    <option value="Married">Married</option>
+		                </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+		                <select class="form-control" name="role">
+		                    <option>Role</option>
+		                    <option value="Country Representative">Country Representative</option>
+		                    <option value="Deputy Country Representative">Deputy Country Representative</option>
+		                    <option value="Operations and Human Resource">Operations and Human Resource</option>
+		                    <option value="Medical Coordinator" >Medical Coordinator</option>
+		                    <option value="Senior Medical Advisor">Senior Medical Advisor</option>
+		                    <option value="Medical Advisor">Medical Advisor</option>
+		                    <option value="M&E">M&E</option>
+		                    <option value="Data Manager">Data Manager</option>
+		                    <option value="Research Assistant">Research Assistant</option>
+		                    <option value="Finance Manager">Finance Manager</option>
+		                    <option value="Senior Accountant">Senior Acountant</option>
+		                    <option value="Acountant">Accountant</option>
+		                    <option value="Account Assistant">Account Assistant</option>
+		                    <option value="Office Manager">Officer Manager</option>
+		                    <option value="Admin Officer">Admin Officer</option>
+		                    <option value="Admin Assistant">Admin Assistant</option>
+		                    <option value="Communications Officer">Communications Officer</option>
+		                    <option value="IT Consultant">IT Consultant</option>
+		                    <option value="IT Officer">IT Officer</option>
+		                    <option value="Cleaner">Cleaner</option>
+		                    <option value="Driver">Driver</option>
+		                    <option value="Security">Security</option>
+		                </select>
+		            </div>
+		            
+	            	<div class="form-group col-md-4">
+			            <select class="form-control" name="employment_status"> 
+			                <option>Employment Status</option>
+			                <option value="Active">Active</option>
+			                <option value="Inactive">Inactive</option>
+			            </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+			            <select class="form-control" name="department">
+			                <option>Department</option>
+			                <option value="Admin">Admin</option>
+			                <option value="Programs">Programs</option>
+			                <option value="Finance">Finance</option>
+			                <option value="Communications">Communications</option>
+			                <option value="IT">IT</option>
+			                <option value="Sanitation">Sanitation</option>
+			                <option value="Transportation">Transportation</option>
+			                <option value="Security">Security</option>
+			            </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+	            		<label for="grants"><small>Grants</small></label>
+			            <select class="form-control" id="grants" name="grants">
+			                <option>Grants</option>
+			                <option value="PPM">PPM</option>
+			                <option value="DFB">DFB</option>
+			                <option value="EU">EU</option>
+			                <option value="WHO">WHO</option>
+			                <option value="LSMOH/RSSH">LSMOH/RSSH</option>
+			                <option value="ARFH">ARFH</option>
+			            </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+	            		<label for="dob"><small>Date of Birth</small></label>
+	                	<input type="date" id="dob" placeholder="Date of Birth" class="form-control" required="required" name="dob">
+	            	</div>
+	            	<div class="form-group col-md-4">
+	            		<label for="doe"><small>Date of Employment</small></label>
+	                	<input type="date" id="doe" class="form-control" required="required" name="doe">
+	            	</div>
+	            	
+	            </div>
+	            	<div class="form-group">
+	                	<button type="submit" class="btn red-button btn-block"><strong>Add</strong></button>
+	            	</div>
+	            </div>   
+	        </form>
+    	</div>
+	</div>
+
+	<div>
+		<footer class="text-center mt-2">&copy; Copyright Damien Foundation 2020</footer>
+	</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</html>

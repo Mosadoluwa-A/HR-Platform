@@ -10,7 +10,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a href="#" class="navbar-brand"><img src="Images/LOGO-AD-EN.jpg" class="nav-img"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navStuff">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navStuff">
 			<a href="#" class="navbar-toggler-icon"></a>
 		</button>
 
@@ -38,13 +38,19 @@
 			<h3 class="text-center">Lorem Ipsum's Profile</h3>
 			<p><img src="Images/user.png" class="profile-img"></p>
 
+
+
 			<div class="row">
 				<div class="col-md-4">
 					<div class="smaller-focus mt-4">
+						<!-- Focus Title -->
 						<div class="focus-top">
-							<h4 class="text-white text-center">Related Documents</h4>
+							<h4 class="text-white text-center">Related Documents <a href="#" data-toggle="modal" data-target="#file"><span><i class="fas fa-file-medical"></i></span></a></h4>
 							<hr style="background-color: white;">
 						</div>
+						<!-- End Focus Title -->
+
+					      <!-- Focus Body -->
 						<div class="smaller-focus-body text-white">
 							<ul>
 								<li>
@@ -62,15 +68,25 @@
 								<li>
 									<span>Lorem ipsum dolor</span>
 									<a href="#">loremipsumdolor</a>
-								</li>			
+								</li>
+								<!-- <li>
+									<form enctype="multipart/form-data">
+										<div class="custom-file mb-3">
+								            <input type="file" class="custom-file-input" id="file" name="file" required>
+								            <label class="custom-file-label" for="image">Choose File...</label>
+								            <button type="submit" class="btn btn-md white-button"><strong>Add File</strong></button>
+					              		</div>
+									</form>
+								</li> -->			
 							</ul>
 						</div>
+						<!-- End Focus Body -->
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="focus-box">
 						<div class="focus-top">
-							<h4 class="text-white text-center">Basic Details</h4>
+							<h4 class="text-white text-center">Basic Details <a href="#" data-toggle="modal" data-target="#edit"><span><i class="fas fa-user-edit"></i></span></a></h4>
 							<hr style="background-color: white;">
 						</div>
 				<div class="focus-body">
@@ -156,9 +172,171 @@
 			
 
 		</div>
+		<!-- Edit user Modal -->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="add files" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+								<h5 class="modal-title" id="add-file">Edit User</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					    <div class="modal-body">
+					      	<!-- <div class="add-stuff-form mt-2 mb-3"> -->
+						        <form>
+						            <div class="form-row">
+						            	<div class="form-group col-md-4">
+						                	<input type="text" placeholder="Name" class="form-control" required="required" name="name">
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<input type="email" placeholder="Email" class="form-control" required="required" name="email">
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<input type="number" placeholder="Phone" class="form-control" required="required" name="phone_no">
+						            	</div>
+						            	<div class="custom-file mb-3 col-md-4">
+								            <input type="file" class="custom-file-input" id="image" name="image" required>
+								            <label class="custom-file-label" for="image">Choose Image...</label>
+						              	</div>
+						            	 <div class="form-group col-md-4">
+							                <select class="form-control" name="gender">
+							                    <option>Gender</option>
+							                    <option value="Male">Male</option>
+							                    <option value="Female">Female</option>
+							                </select>
+						            	</div>
+
+						            	<div class="form-group col-md-4">
+						                	<input type="text" placeholder="Address" class="form-control" required="required" name="address">
+						            	</div>
+						            	<div class="form-group col-md-4">
+							                <select class="form-control" name="nationality">
+							                    <option>Nationality</option>
+							                    <option value="Nigeria">Nigeria</option>
+							                    <option value="Togo">Togo</option>
+							                    <option value="Ghana">Ghana</option>
+							                    <option value="Kenya">Kenya</option>
+							                </select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<input type="text" placeholder="State of Origin" class="form-control" required="required" name="state_of_origin">
+						            	</div>
+						            	<div class="form-group col-md-4">
+							                <select class="form-control" name="marital_status">
+							                    <option>Marital Status</option>
+							                    <option value="Single">Single</option>
+							                    <option value="Married">Married</option>
+							                </select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+							                <select class="form-control" name="role">
+							                    <option>Role</option>
+							                    <option value="Country Representative">Country Representative</option>
+							                    <option value="Deputy Country Representative">Deputy Country Representative</option>
+							                    <option value="Operations and Human Resource">Operations and Human Resource</option>
+							                    <option value="Medical Coordinator" >Medical Coordinator</option>
+							                    <option value="Senior Medical Advisor">Senior Medical Advisor</option>
+							                    <option value="Medical Advisor">Medical Advisor</option>
+							                    <option value="M&E">M&E</option>
+							                    <option value="Data Manager">Data Manager</option>
+							                    <option value="Research Assistant">Research Assistant</option>
+							                    <option value="Finance Manager">Finance Manager</option>
+							                    <option value="Senior Accountant">Senior Acountant</option>
+							                    <option value="Acountant">Accountant</option>
+							                    <option value="Account Assistant">Account Assistant</option>
+							                    <option value="Office Manager">Officer Manager</option>
+							                    <option value="Admin Officer">Admin Officer</option>
+							                    <option value="Admin Assistant">Admin Assistant</option>
+							                    <option value="Communications Officer">Communications Officer</option>
+							                    <option value="IT Consultant">IT Consultant</option>
+							                    <option value="IT Officer">IT Officer</option>
+							                    <option value="Cleaner">Cleaner</option>
+							                    <option value="Driver">Driver</option>
+							                    <option value="Security">Security</option>
+							                </select>
+							            </div>
+							            
+						            	<div class="form-group col-md-4">
+								            <select class="form-control" name="employment_status"> 
+								                <option>Employment Status</option>
+								                <option value="Active">Active</option>
+								                <option value="Inactive">Inactive</option>
+								            </select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+								            <select class="form-control" name="department">
+								                <option>Department</option>
+								                <option value="Admin">Admin</option>
+								                <option value="Programs">Programs</option>
+								                <option value="Finance">Finance</option>
+								                <option value="Communications">Communications</option>
+								                <option value="IT">IT</option>
+								                <option value="Sanitation">Sanitation</option>
+								                <option value="Transportation">Transportation</option>
+								                <option value="Security">Security</option>
+								            </select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+						            		<label for="grants"><small>Grants</small></label>
+								            <select class="form-control" id="grants" name="grants">
+								                <option>Grants</option>
+								                <option value="PPM">PPM</option>
+								                <option value="DFB">DFB</option>
+								                <option value="EU">EU</option>
+								                <option value="WHO">WHO</option>
+								                <option value="LSMOH/RSSH">LSMOH/RSSH</option>
+								                <option value="ARFH">ARFH</option>
+								            </select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+						            		<label for="dob"><small>Date of Birth</small></label>
+						                	<input type="date" id="dob" placeholder="Date of Birth" class="form-control" required="required" name="dob">
+						            	</div>
+						            	<div class="form-group col-md-4">
+						            		<label for="doe"><small>Date of Employment</small></label>
+						                	<input type="date" id="doe" class="form-control" required="required" name="doe">
+						            	</div>
+						            	
+						            </div>
+						            	<div class="form-group">
+						                	<button type="submit" class="btn red-button btn-block"><strong>Edit</strong></button>
+						            	</div>
+						            </div>   
+						        </form>
+    						<!-- </div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Edit User Modal -->
+
+		<!-- Add File Modal -->
+							<div class="modal fade" id="file" tabindex="-1" role="dialog" aria-labelledby="add files" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									    <h5 class="modal-title" id="add-file">Add File</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									    <span aria-hidden="true">&times;</span>
+									</button>
+						     </div>
+					      <div class="modal-body">
+					      		<form enctype="multipart/form-data">
+									<div class="custom-file mb-3">
+								        <input type="file" class="custom-file-input" id="file" name="file" required>
+								        <label class="custom-file-label" for="image">Choose File...</label>
+					              	</div>
+					              	<button type="submit" class="btn btn-md black-button"><strong>Add File</strong></button>
+								</form>
+					      </div>
+		<!-- End Add File Modal -->
 	</div>	
 	<div>
 		<footer class="text-center mt-2">&copy; Copyright Damien Foundation 2020</footer>
 	</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </html>
