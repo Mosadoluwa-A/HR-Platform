@@ -20,13 +20,31 @@
 			<ul class="navbar-nav ml-5">
                 {% if user.is_authenticated %}
 				<li class="nav-item active">
-					<a href="{% url 'home' %}" class="nav-link"><strong class="red-text">EMPLOYEES</strong></a>		
+					<a href="{% url 'home' %}" class="nav-link">
+						{% if title == "Home" %}
+						<strong class="{{ active_nav }}">EMPLOYEES</strong>
+						{% else %}
+						<strong class="text-muted">EMPLOYEES</strong>
+						{% endif %}
+					</a>		
 				</li>
 				<li class="nav-item">
-					<a href="departments.html" class="nav-link"><strong>DEPARTMENTS</strong></a>
+					<a href="{% url 'list_departments' %}" class="nav-link">
+						{% if title == "Departments" %}
+						<strong class="{{ active_nav }}">DEPARTMENTS</strong>
+						{% else %}
+						<strong>DEPARTMENTS</strong>
+						{% endif %}
+					</a>
 				</li>
 				<li class="nav-item">
-					<a href="donors.html" class="nav-link"><strong>DONORS</strong></a>
+					<a href="donors.html" class="nav-link">
+						{% if title == "Donors" %}
+						<strong class="{{ active_nav }}">DONORS</strong>
+						{% else %}
+						<strong>DONORS</strong>
+						{% endif %}
+					</a>
 				</li>
 				<form method="POST" action="{% url 'logout_user' %}">
                     {% csrf_token %}
@@ -46,7 +64,7 @@
 
     
     {% endblock %}
-		<footer class="text-center mt-2">&copy; Copyright Damien Foundation 2020</footer>
+		<footer class="text-center mt-2">&copy; Copyright Damien Foundation 2021</footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

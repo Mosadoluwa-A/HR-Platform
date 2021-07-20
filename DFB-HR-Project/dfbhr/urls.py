@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from employees import views
+from departments.views import list_departments
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('logout', views.logout_user, name="logout_user"),
     path('employees/', include('employees.urls')),
+    path('departments/', list_departments, name="list_departments")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

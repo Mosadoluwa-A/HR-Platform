@@ -9,8 +9,8 @@ from donors.models import Donor
 from departments.models import Department
 from django_countries import countries
 
-# EMPLOYEES
 
+# EMPLOYEES APP
 
 @login_required(login_url='/')
 def home(request):
@@ -22,6 +22,7 @@ def home(request):
     dictionary = {
         "active": staffs,
         "inactive": inactive,
+        "active_nav": "red-text",
         "title": "Home"
     }
     return render(request, 'employees/home.html', dictionary)
@@ -44,6 +45,7 @@ def staff_profile(request, staff_id):
     # donors = staff.donors.all()
     dictionary = {
         "title": "Profile",
+        "active_nav": "red-text",
         "staff": staff,
         "documents": documents,
         "countries": countries,
@@ -62,6 +64,7 @@ def add_staff(request):
         donors = Donor.objects.all()
         dictionary = {
             "title": "Add Employee",
+            "active_nav": "red-text",
             "countries": countries,
             "departments": departments,
             "donors": donors,
@@ -135,7 +138,6 @@ def add_files(request):
 
 
 # AUTHENTICATION
-
 
 def login_user(request):
     if request.user.is_authenticated:
