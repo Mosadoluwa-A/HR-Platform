@@ -1,0 +1,344 @@
+{% extends 'employees/base.html' %}
+{% load static %}
+{% block content %}	
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+			{% if message.level == 25 %}
+				<div class="alert  alert-success {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% else %}
+				<div class="alert  alert-danger {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+	<div id="main">
+		<div class="container">
+			<h3 class="text-center">{{ staff.name }}'s Profile</h3>
+			<p><img src="{{ staff.image.url }}" class="profile-img"></p>
+
+
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="smaller-focus mt-4">
+						<!-- Focus Title -->
+						<div class="focus-top">
+							<h4 class="text-white text-center">Related Documents <a href="#" data-toggle="modal" data-target="#file"><span><i class="fas fa-file-medical"></i></span></a></h4>
+							<hr style="background-color: white;">
+						</div>
+						<!-- End Focus Title -->
+
+					      <!-- Focus Body -->
+						<div class="smaller-focus-body text-white">
+							<ul>
+								{% for document in documents %}
+								<li>
+									<span>{{ document.name }}</span><br>
+									<a href="{{ document.file.url }}" target="_blank">Get {{ document.name }}</a>
+								</li>
+								{% empty %}
+									<li>No file available yet.</li>
+								{% endfor %}
+								
+								<!-- <li>
+									<form enctype="multipart/form-data">
+										<div class="custom-file mb-3">
+								            <input type="file" class="custom-file-input" id="file" name="file" required>
+								            <label class="custom-file-label" for="image">Choose File...</label>
+								            <button type="submit" class="btn btn-md white-button"><strong>Add File</strong></button>
+					              		</div>
+									</form>
+								</li> -->			
+							</ul>
+						</div>
+						<!-- End Focus Body -->
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="focus-box">
+						<div class="focus-top">
+							<h4 class="text-white text-center">Basic Details <a href="#" data-toggle="modal" data-target="#edit"><span><i class="fas fa-user-edit"></i></span></a></h4>
+							<hr style="background-color: white;">
+						</div>
+				<div class="focus-body">
+					<table>
+						<tbody>
+							<tr class="text-white">
+								<th>Name:</th>
+								<td>&nbsp;{{ staff.name }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Email:</th>
+								<td>&nbsp;{{ staff.email }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Phone:</th>
+								<td>&nbsp;{{ staff.phone_no }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Address:</th>
+								<td>&nbsp;{{ staff.address }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Nationality:</th>
+								<td>&nbsp;{{ staff.nationality.name }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>State:</th>
+								<td>&nbsp;{{ staff.state_of_origin|title }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Marital Status:</th>
+								<td>&nbsp;{{ staff.marital_status|title }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Sex:</th>
+								<td>&nbsp;{{ staff.gender|title }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>DOB:</th>
+								<td>&nbsp;{{ staff.date_of_birth }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+				</div>
+				<div class="col-md-4">
+					<div class="smaller-focus mt-4">
+						<div class="focus-top">
+							<h4 class="text-white text-center">Work Details</h4>
+							<hr style="background-color: white;">
+						</div>
+						<div class="smaller-focus-body text-white">
+							<table>
+						<tbody>
+							<tr class="text-white">
+								<th>Position:</th>
+								<td>&nbsp;{{ staff.role|title }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Employment:</th>
+								<td>&nbsp;{{ staff.employment_date }}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Status:</th>
+								<td>&nbsp;
+									{% if staff.is_active %}
+										Employed
+									{% else %}
+										Inactive
+									{% endif %}
+								</td>
+							</tr>
+							<tr class="text-white">
+								<th>Department:</th>
+								<td>&nbsp;{{staff.department}}</td>
+							</tr>
+							<tr class="text-white">
+								<th>Grants:</th>
+								<td>&nbsp;
+									{% for donor in staff.donors.all %}
+										{{ donor }}
+									{% empty %}
+										No donor
+									{% endfor %}
+								</td>
+							</tr>
+							
+						</tbody>
+					</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+		</div>
+		<!-- Edit user Modal -->
+			<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="add files" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+								<h5 class="modal-title" id="add-file">Edit User</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+						</div>
+					    <div class="modal-body">
+					      	<!-- <div class="add-stuff-form mt-2 mb-3"> -->
+						        <form method="POST" action="{% url 'employees:edit_staff' staff.id %}" enctype="multipart/form-data">
+									{% csrf_token %}
+						            <div class="form-row">
+						            	<div class="form-group col-md-4">
+						                	<input type="text" placeholder="Name" value="{{ staff.name }}" class="form-control" required="required" name="name">
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<input type="email" placeholder="Email" value="{{ staff.email }}" class="form-control" required="required" name="email">
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<input type="number" placeholder="Phone" value="{{ staff.phone_no }}" class="form-control" required="required" name="phone_no">
+						            	</div>
+							
+										<div class="form-group col-md-4">
+							                <select class="form-control" id="nationality" name="nationality">
+												<option>Nationality</option>
+												{% for country in countries %}
+													{% if staff.nationality.name == country.name %}
+													<option value="{{ country.code }}" selected >{{ country.name }}</option>
+													{% else %}
+													<option value="{{ country.code }}">{{ country.name }}</option>
+													{% endif %}
+												{% endfor %}
+											</select>
+						            	</div>
+						            	<div class="form-group col-md-4">
+						                	<select class="form-control" id="soe" name="state_of_origin">
+												<option>State of Origin</option>
+												{% for state in states %}
+													{% if state == staff.state_of_origin %}
+														<option value="{{ state }}" selected>{{ state|title }}</option>
+													{% else %}
+														<option value="{{ state }}">{{ state|title }}</option>
+													{% endif %}
+												{% endfor %}
+											</select>
+						            	</div>
+										<div class="form-group col-md-4">
+							                <select class="form-control" name="marital_status">
+							                    <option>Marital Status</option>
+												{% if staff.marital_status == "single" %}
+							                    <option value="single" selected>Single</option>
+												<option value="married">Married</option>
+												{% else %}
+												<option value="single">Single</option>
+							                    <option value="married" selected>Married</option>
+												{% endif %}
+							                </select>
+						            	</div>
+										<div class="form-group col-md-4">
+							                <select class="form-control" name="gender">
+							                    <option>Gender</option>
+												{% if staff.gender == "male" %}
+							                    <option value="male" selected>Male</option>
+												<option value="female">Female</option>
+												{% else %}
+												<option value="male">Male</option>
+							                    <option value="female" selected>Female</option>
+												{% endif %}
+							                </select>
+						            	</div>
+										<div class="form-group col-md-4">
+						            		<label for="dob"><small>Date of Birth</small></label>
+						                	<input type="date" id="dob" value="{{ staff.date_of_birth|date:'Y-m-d' }}" placeholder="Date of Birth" class="form-control" name="date_of_birth">
+						            	</div>
+										<div class="form-group col-md-4">
+								            <select class="form-control" name="department">
+								                <option>Department</option>
+								                {% for department in departments %}
+													{% if department == staff.department %}
+														<option value="{{ department.id }}" selected>{{ department.name|title }}</option>
+													{% else %}
+														<option value="{{ department.id }}">{{ department.name|title }}</option>
+													{% endif %}
+												{% endfor %}
+								            </select>
+						            	</div>
+										<div class="form-group col-md-4">
+							                <select class="form-control" name="role">
+							                    <option>Role</option>
+							                    {% for role in roles %}
+													{% if role == staff.role %}
+														<option value="{{ role }}" selected>{{ role|title }}</option>
+													{% else %}
+														<option value="{{ role }}">{{ role|title }}</option>
+													{% endif %}
+												{% endfor %}
+							                </select>
+							            </div>
+
+										<div class="form-group col-md-4">
+						            		<label for="doe"><small>Date of Employment</small></label>
+						                	<input type="date" id="doe" value="{{staff.employment_date|date:'Y-m-d' }}" class="form-control" name="employment_date">
+						            	</div>	
+
+						            	<div class="custom-file mb-3 col-md-4">
+								            <input type="file" class="custom-file-input" id="image" name="image">
+								            <label class="custom-file-label" for="image">Choose Image...</label>
+						              	</div>	
+						            	
+						            	
+						            	<div class="form-group col-md-6">
+						            		<label for="grants"><small>Grants</small></label>
+								            <select multiple class="form-control" id="donors" name="donors">
+												<option>Donors</option>
+												{% for donor in donors %}
+													{% if donor in staff.donors.all %}
+														<option value="{{ donor.id }}" selected>{{ donor.name }}</option>
+													{% else %}
+														<option value="{{ donor.id }}">{{ donor.name }}</option>
+													{% endif %}
+												{% endfor %}
+											</select>
+						            	</div>
+						            	
+										<div class="form-group col-md-6">
+											<label for="address"><small>Address</small></label>
+											<textarea id="address" placeholder="Address..." class="form-control" required="required" name="address">{{ staff.address }}</textarea>
+										</div>
+						            	
+						            	
+						            </div>
+						            	<div class="form-group">
+						                	<button type="submit" class="btn red-button btn-block"><strong>Edit</strong></button>
+						            	</div>
+						            </div>   
+						        </form>
+    						<!-- </div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- End Edit User Modal -->
+
+		<!-- Add File Modal -->
+							<div class="modal fade" id="file" tabindex="-1" role="dialog" aria-labelledby="add files" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+									    <h5 class="modal-title" id="add-file">Add File</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									    <span aria-hidden="true">&times;</span>
+									</button>
+						     </div>
+					      <div class="modal-body">
+					      		<form method="POST", action="{% url 'employees:add_file' %}" enctype="multipart/form-data">
+									{% csrf_token %}
+									<input type="text" placeholder="Name your document" id="docname" class="form-control" required="required" name="name">
+
+									<input type="text" name="employee" value="{{ staff.id }}" style="display: none;" >
+
+									<div class="custom-file mb-3">
+								        <input type="file" class="custom-file-input" id="file" name="file" required>
+								        <label class="custom-file-label" for="file">Choose File...</label>
+					              	</div>
+					              	<button type="submit" class="btn btn-md black-button"><strong>Add File</strong></button>
+								</form>
+					      </div>
+		<!-- End Add File Modal -->
+	</div>
+	<footer class="text-center mt-2">&copy; Copyright Damien Foundation 2020</footer>	
+{% endblock %}

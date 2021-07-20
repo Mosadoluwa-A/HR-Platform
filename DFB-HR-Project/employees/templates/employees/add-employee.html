@@ -1,0 +1,157 @@
+{% extends 'employees/base.html' %}
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+			{% if message.level == 25 %}
+				<div class="alert  alert-success {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% else %}
+				<div class="alert  alert-danger {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+	<div id="main">
+		<div class="add-stuff-form mt-2 mb-3">
+	        <form method="POST" enctype="multipart/form-data" action="{% url 'employees:create' %}">
+				{% csrf_token %}
+	            <h2 class="text-center">Add Employee</h2>
+	            <div class="form-row">
+	            	<div class="form-group col-md-4">
+						<label for="name"><small>Name</small></label>
+	                	<input type="text" id="name" placeholder="Name" class="form-control" required="required" name="name">
+	            	</div>
+	            	<div class="form-group col-md-4">
+						<label for="email"><small>Email</small></label>
+	                	<input type="email" id="email" placeholder="Email" class="form-control" required="required" name="email">
+	            	</div>
+	            	<div class="form-group col-md-4">
+						<label for="number"><small> Phone Number</small></label>
+	                	<input type="number" id="number" placeholder="Phone" class="form-control" required="required" name="phone_no">
+	            	</div>
+					
+	            	<div class="form-group col-md-4">
+						<label for="nationality"><small>Nationality</small></label>
+		                <select class="form-control" id="nationality" name="nationality">
+		                    <option>Nationality</option>
+							{% for country in countries %}
+		                    	<option value="{{ country.code }}">{{ country.name }}</option>
+							{% endfor %}
+		                </select>
+	            	</div>
+					<div class="form-group col-md-4">
+						<label for="soe"><small>State of Origin</small></label>
+	                	<select class="form-control" id="soe" name="state_of_origin">
+		                    <option>State of Origin</option>
+		                    <option value="ogun">Ogun</option>
+		                    <option value="osun">Osun</option>
+							<option value="oyo" >Oyo</option>
+							<option value="lagos">Lagos</option>
+							<option value="ondo">Ondo</option>
+							<option value="kwara">Kwara</option>
+							<option value="kogi">Kogi</option>
+							<option value="ekiti">Ekiti</option>
+							<option value="delta">Delta</option>
+		                </select>
+	            	</div>
+	            	<div class="form-group col-md-4">
+						<label for="mstat"><small>Marital Status</small></label>
+		                <select class="form-control" id="mstat" name="marital_status">
+		                    <option>Marital Status</option>
+		                    <option value="single">Single</option>
+		                    <option value="married">Married</option>
+		                </select>
+	            	</div>
+					<div class="form-group col-md-4">
+						<label for="gender"><small>Gender</small></label>
+		                <select class="form-control" id="gender" name="gender">
+		                    <option>Gender</option>
+		                    <option value="male">Male</option>
+		                    <option value="female">Female</option>
+		                </select>
+	            	</div>
+					<div class="form-group col-md-4">
+	            		<label for="dob"><small>Date of Birth</small></label>
+	                	<input type="date" id="dob" placeholder="Date of Birth" class="form-control" required="required" name="date_of_birth">
+	            	</div>
+					<div class="form-group col-md-4">
+						<label for="dept"><small>Department</small></label>
+		                <select class="form-control" id="dept" name="department">
+		                    <option>Department</option>
+		                    {% for department in departments %}
+								<option value="{{ department.id }}">{{ department.name }}</option>
+							{% endfor %}
+		                </select>
+		            </div>
+					<div class="form-group col-md-4">
+						<label for="role"> Role</label>
+						<select class="form-control" id="role" name="role">
+							<option>Role</option>
+							<option value="country representative">Country Representative</option>
+							<option value="deputy country representative">Deputy Country Representative</option>
+							<option value="operations and human resource">Operations and Human Resource</option>
+							<option value="medical coordinator" >Medical Coordinator</option>
+							<option value="senior medical advisor">Senior Medical Advisor</option>
+							<option value="medical advisor">Medical Advisor</option>
+							<option value="m&e">M&E</option>
+							<option value="data manager">Data Manager</option>
+							<option value="research assistant">Research Assistant</option>
+							<option value="finance manager">Finance Manager</option>
+							<option value="senior accountant">Senior Acountant</option>
+							<option value="accountant">Accountant</option>
+							<option value="account assistant">Account Assistant</option>
+							<option value="office manager">Officer Manager</option>
+							<option value="admin officer">Admin Officer</option>
+							<option value="admin assistant">Admin Assistant</option>
+							<option value="communications officer">Communications Officer</option>
+							<option value="it consultant">IT Consultant</option>
+							<option value="it officer">IT Officer</option>
+							<option value="cleaner">Cleaner</option>
+							<option value="driver">Driver</option>
+							<option value="security">Security</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4">
+	            		<label for="doe"><small>Date of Employment</small></label>
+	                	<input type="date" id="doe" class="form-control" required="required" name="employment_date">
+	            	</div>
+	            	<div class="custom-file mb-3 col-md-4">
+			            <input type="file" class="custom-file-input" id="image" name="image" required>
+			            <label class="custom-file-label" for="image">Choose Image...</label>
+	              	</div>
+					
+					  <div class="form-group col-md-4">
+						<label for="address"><small>Address</small></label>
+	                	<textarea id="address" placeholder="Address..." class="form-control" required="required" name="address"></textarea>
+	            	</div>
+
+					<div class="form-group col-md-4">
+						<label for="donors"><small>Donors</small></label>
+		                <select multiple class="form-control" id="donors" name="donors">
+		                    <option>Donors</option>
+		                    {% for donor in donors %}
+								<option value="{{ donor.id }}">{{ donor.name }}</option>
+							{% endfor %}
+		                </select>
+		            </div>
+	            </div>
+	            	<div class="form-group">
+	                	<button type="submit" class="btn red-button btn-block"><strong>Add</strong></button>
+	            	</div>
+	            </div>   
+	        </form>
+    	</div>
+	</div>
+	{% endblock %}

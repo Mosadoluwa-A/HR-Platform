@@ -1,0 +1,220 @@
+
+#main{
+	height: 90vh;
+	background-image: linear-gradient(to bottom, rgba(100, 100, 100, 0), rgba(100, 100, 100, 0)), url(Images/DFB-Favicon-bg.png);
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-position: 90% 100%;
+	background-size: 35rem 35rem;
+	/*background-size: contain; */
+}
+
+.img-smaller{
+	width: 30rem;
+}
+.nav-img{
+	width: 20rem;
+}
+.black-button{
+	background-color: black;
+	color: white;
+}
+.black-button > strong:hover{
+	color: grey;
+}
+.staff-card{
+	background-color: #f02;
+	border: solid;
+	border-color:#000;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.card-image{
+	width: 6rem;
+	margin-left: 10rem;
+}
+.user-img{
+	width: 5.9rem;
+	margin-left: 10rem;
+	background-color: white;
+	border-radius: 50%;
+}
+.profile-img{
+	width: 5.9rem;
+	margin-left: 30rem;
+	margin-top: 1rem;
+	background-color: white;
+	border-radius: 50%;
+}
+
+.navbar-nav > li{
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+#login-body{
+	width: 95%;
+	background: #000;
+	font-family: Arial	;
+}
+#login-form{
+	width: 30%;
+	height: 50vh;
+	margin: 0px auto;
+}
+#login-form > input::placeholder{
+		font-size: .8rem;
+}
+.add-stuff-form {
+	width: 40rem;
+	margin: 0 auto;
+}
+.add-stuff-form form {
+	/*background: #fd5365;*/
+	background-color: #000;
+	color: white;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+	border: solid;
+	border-radius: 10px;
+	border-color: #f00;
+}
+.add-stuff-form h2 {
+	margin: 0 0 15px;
+}
+.form-control, .btn {
+	min-height: 38px;
+	border-radius: 5px;
+}
+.white-text{
+	color: white;
+	padding-top: 3rem;
+	padding-bottom: 1.5rem;
+	font-weight: bold;
+}
+.white-button{
+	background-color: white;
+	color: black;
+}
+.red-text{
+	color: red;
+}
+.nav-link > strong:hover{
+	color: red!important;
+}
+/*.test-text{
+	line-height: 3rem !important;
+	border-radius: 4rem;
+	width: 100%;
+}*/
+	
+.round-2{
+	border-radius: 2rem;
+}
+.red-button{
+	background-color: red;
+	color: white;
+}
+.red-background{
+	background-color: #f02;
+	cursor: pointer;
+}
+#login-form input{
+	border-radius: 2rem;
+}
+.light-text{
+	color: #aaa;
+	font-size: .8rem;
+}
+.remember-text{
+	font-size: .8rem;
+}
+#submit-btn{
+	/*margin: 2rem;*/
+	/*margin-bottom: 2rem;
+	margin-top: 2rem;*/
+	border-radius: 1rem;
+	font-weight: bold;
+}
+.focus-box{
+	width: 22rem;
+	height: 25rem;
+	background-color: black;
+	/*margin-left: .2rem;*/
+	border-radius: 2rem;
+}
+.focus-top{
+	padding-top: .5rem;
+}
+.focus-body{
+	padding: 1rem 2rem 1rem 2rem;
+}
+
+.smaller-focus{
+	width: 16rem;
+	height: 20rem;
+	background-color: black;
+	margin-left: 2rem;
+	border-radius: 2rem;
+}
+.smaller-focus-body{
+	padding: .5rem 1rem 1rem 1rem;
+}
+.smaller-focus-body > ul{
+	list-style: none;
+	font-size: 1rem;
+}
+.dept-flex{
+	height: 40vh;
+}
+.dept-focus{
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1.5rem;
+	background-color: black;
+	color: white;
+	height: 13rem;
+	width: 13rem;
+	border-radius: .5rem;
+}
+.dept-focus > h4{
+	align-self: center;
+}
+.dept-focus > small{
+	align-self: center;
+}
+.donor-flex{
+	height: 30vh;
+}
+.donor-focus{
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 1.5rem;
+	background-color: black;
+	color: black;
+	height: 13rem;
+	width: 13rem;
+	border-radius: 10rem;
+}
+.donor-focus > h4{
+	align-self: center;
+	background-color: white;
+	padding: .5rem;
+	border-radius: .2rem;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+.donor-focus > small{
+	align-self: center;
+}
+
+@media (min-width: 992px){
+			.dept-flex{
+			height: 100vh;
+		}
+			.donor-flex{
+			height: 80vh;
+		}
+}

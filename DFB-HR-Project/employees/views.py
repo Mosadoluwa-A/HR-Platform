@@ -1,0 +1,163 @@
+import requests
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from employees.models import Employee, StaffDocument
+from employees.forms import EmployeeForm, DocumentForm
+from donors.models import Donor
+from departments.models import Department
+from django_countries import countries
+
+# EMPLOYEES
+
+
+@login_required(login_url='/')
+def home(request):
+    # watever = requests.get("https://nigerian-states-info.herokuapp.com/api/v1/states")
+    # json = watever.json()
+    # print(dir(json))
+    staffs = Employee.objects.filter(is_active=True)
+    inactive = Employee.objects.filter(is_active=False)
+    dictionary = {
+        "active": staffs,
+        "inactive": inactive,
+        "title": "Home"
+    }
+    return render(request, 'employees/home.html', dictionary)
+
+
+@login_required(login_url='/')
+def staff_profile(request, staff_id):
+    staff = get_object_or_404(Employee, id=staff_id)
+    documents = StaffDocument.objects.filter(employee=staff_id)
+    states = ['oyo', 'ogun', 'osun', 'lagos', 'kwara', 'ekiti', 'ondo', 'kogi', 'delta']
+    departments = Department.objects.all()
+    donors = Donor.objects.all()
+    roles = [
+        "security officer", "senior security officer", "driver", "senior driver", "cleaner", "senior cleaner",
+        "IT Officer", "IT Consultant", "communications officer", "accounts assistant", "accountant", "senior accountant",
+        "finance manager", "research assistant", "data manager", "m&e officer", "medical advisor",
+        "senior medical advisor", "medical coordinator", "admin assistant", "admin officer", "office manager",
+        "operations & hr", "deputy country rep", "country rep"
+    ]
+    # donors = staff.donors.all()
+    dictionary = {
+        "title": "Profile",
+        "staff": staff,
+        "documents": documents,
+        "countries": countries,
+        "states": states,
+        "departments": departments,
+        "roles": roles,
+        "donors": donors
+    }
+    return render(request, 'employees/profile.html', dictionary)
+
+
+@login_required(login_url='/')
+def add_staff(request):
+    if request.method == "GET":
+        departments = Department.objects.all()
+        donors = Donor.objects.all()
+        dictionary = {
+            "title": "Add Employee",
+            "countries": countries,
+            "departments": departments,
+            "donors": donors,
+        }
+        return render(request, 'employees/add-employee.html', dictionary)
+    else:
+        try:
+            form = EmployeeForm(request.POST, request.FILES)
+            if form.is_valid:
+                print(form.errors)
+                form.save()
+            messages.success(request, "Staff Added Successfully")
+            return redirect(home)
+        except ValueError:
+            messages.error(request, "Data is not correct")
+            departments = Department.objects.all()
+            donors = Donor.objects.all()
+            dictionary = {
+                "title": "Add Employee",
+                "countries": countries,
+                "departments": departments,
+                "donors": donors
+            }
+            return render(request, 'employees/add-employee.html', dictionary)
+
+
+@login_required(login_url='/')
+def edit_staff(request, staff_id):
+    if request.method == "POST":
+
+        try:
+            employee = get_object_or_404(Employee, id=staff_id)
+            form = EmployeeForm(request.POST, request.FILES, instance=employee)
+            if form.is_valid():  # To check whether the fields are empty
+                print(form.errors)
+                form.save()
+                messages.success(request, "Employee details successfully updated")
+                return redirect("employees:staff_profile", staff_id=employee.id)
+
+            else:  # If some fields are empty
+                messages.error(request, "Fill all the fields")
+                return redirect("employees:staff_profile", staff_id=employee.id)
+
+        except ValueError:
+            employee = get_object_or_404(Employee, id=staff_id)
+            messages.error(request, "Update Failed Bad Data")
+            return redirect("employees:staff_profile", staff_id=employee.id)
+    else:
+        pass
+
+
+@login_required(login_url='/')
+def add_files(request):
+    if request.method == "POST":
+        try:
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid:
+                print(form.errors)
+                employee = form.cleaned_data['employee']
+                new_file = form.save(commit=False)
+                new_file.employee = employee
+                new_file.save()
+                messages.success(request, "File Added Successfully")
+                return redirect("employees:staff_profile", staff_id=employee.id)
+        except ValueError:
+            employee = form.cleaned_data['employee']
+            messages.error(request, "Data is not correct")
+            return redirect("employees:staff_profile", staff_id=employee.id)
+    else:
+        pass
+
+
+# AUTHENTICATION
+
+
+def login_user(request):
+    if request.user.is_authenticated:
+        messages.success(request, "You are already logged in")
+        return redirect(home)
+    elif request.method == "GET":
+        return render(request, 'employees/login.html')
+
+    else:
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            messages.error(request, "Sorry username and passwords did not match")
+            return render(request, 'employees/login.html')
+        else:
+            login(request, user)
+            messages.success(request, "Login Success")
+            return redirect(home)
+
+
+def logout_user(request):
+    if request.method == "POST":
+        logout(request)
+    return redirect(login_user)
+
+

@@ -1,0 +1,44 @@
+{% extends 'employees/base.html' %}
+{% load static %}
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+			{% if message.level == 25 %}
+				<div class="alert  alert-success {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% else %}
+				<div class="alert  alert-danger {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container-fluid red-background">
+		<h3 class="text-center white-text">EMPLOYEES &nbsp;<a href="{% url 'employees:create' %}"><button class="btn black-button btn-lg"><strong>Add</strong></button></a></h3>
+		<div class="row">
+			{% for staff in active %}
+			<div class="col-md-4">
+				<div class="card staff-card mb-2">
+					<img src="{{ staff.image.url }}" alt="User" class="card-img-top user-img mt-3 mb-2">
+					<div class="card-body bg-light text-center">
+						<a href="{% url 'employees:staff_profile' staff.id %}"><h5 class="card-title">{{ staff.name }}</h5></a>
+						<p class="card-text">{{ staff.email }}</p>
+						<small>Joined Since {{ staff.employment_date }}</small>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
