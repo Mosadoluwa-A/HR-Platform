@@ -19,6 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from employees import views
 from departments.views import list_departments
+from donors.views import list_donors
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,8 @@ urlpatterns = [
     path('home/', views.home, name="home"),
     path('logout', views.logout_user, name="logout_user"),
     path('employees/', include('employees.urls')),
-    path('departments/', list_departments, name="list_departments")
+    path('departments/', list_departments, name="list_departments"),
+    path('donors/', list_donors, name="list_donors")
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -38,7 +38,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="donors.html" class="nav-link">
+					<a href="{% url 'list_donors' %}" class="nav-link">
 						{% if title == "Donors" %}
 						<strong class="{{ active_nav }}">DONORS</strong>
 						{% else %}

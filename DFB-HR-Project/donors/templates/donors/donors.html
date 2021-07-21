@@ -1,0 +1,84 @@
+{% extends 'employees/base.html' %}
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+			{% if message.level == 25 %}
+				<div class="alert  alert-success {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% else %}
+				<div class="alert  alert-danger {{ message.tags }} alert-dismissible w-25 mt-2" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					{{ message | safe }}
+				</div>
+			{% endif %}
+        {% endfor %}
+    </ul>
+{% endif %}
+		<div id="main">
+			<div class="container">
+
+					<div class="d-flex donor-flex">
+						
+						<h3><strong>DONORS</strong></h3>
+
+					<!-- Modal -->
+					{% for donor in donors %}
+					<div class="modal fade" id="{{ donor.name }}" tabindex="-1" role="dialog" aria-labelledby="department staff" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="dept-staff">Department Staff</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					      		<ul class="list-group">
+									{% for staff in donor.employee_set.all %}
+ 										<li class="list-group-item">{{ staff.name }}</li>
+									{% endfor %}
+								</ul>
+					      </div>
+					      <!-- div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Save changes</button>
+					      </div> -->
+					    </div>
+					  </div>
+					</div>
+					{% endfor %}
+					<!-- Donors -->
+					<div class="row mt-5">
+						{% for donor in donors %}
+							{% if donors.count == 2 %}
+								<div class="col-md-6">
+									<div class="donor-focus">
+										<h4>{{ donor.name }}</h4>
+										<small><a href="#" data-toggle="modal" data-target="#{{ donor.name }}">Staff Volume: {{ donor.employee_set.count }}</a></small>
+									</div>
+								</div>
+							{% else %}
+								<div class="col-md-4">
+									<div class="donor-focus">
+										<h4>{{ donor.name }}</h4>
+										<small><a href="#" data-toggle="modal" data-target="#{{ donor.name }}">Staff Volume: {{ donor.employee_set.count }}</a></small>
+									</div>
+								</div>
+							{% endif %}
+						{% empty %}
+							<h3>Sorry there are no donors to show</h3>
+						{% endfor %}
+						
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock %}
