@@ -1,4 +1,4 @@
-import requests
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -42,7 +42,6 @@ def staff_profile(request, staff_id):
         "senior medical advisor", "medical coordinator", "admin assistant", "admin officer", "office manager",
         "operations & hr", "deputy country rep", "country rep"
     ]
-    # donors = staff.donors.all()
     dictionary = {
         "title": "Profile",
         "active_nav": "red-text",
@@ -73,12 +72,19 @@ def add_staff(request):
     else:
         try:
             form = EmployeeForm(request.POST, request.FILES)
+
             if form.is_valid:
-                print(form.errors)
                 form.save()
-            messages.success(request, "Staff Added Successfully")
-            return redirect(home)
-        except ValueError:
+                messages.success(request, "Staff Added Successfully")
+                return redirect(home)
+            else:
+                print(form.errors)
+                messages.error(request, "Please fill all the fields")
+                return redirect(add_staff)
+        except Exception as e:
+            print(e)
+            form = EmployeeForm(request.POST, request.FILES)
+            print(form.errors)
             messages.error(request, "Data is not correct")
             departments = Department.objects.all()
             donors = Donor.objects.all()
@@ -98,14 +104,13 @@ def edit_staff(request, staff_id):
         try:
             employee = get_object_or_404(Employee, id=staff_id)
             form = EmployeeForm(request.POST, request.FILES, instance=employee)
-            if form.is_valid():  # To check whether the fields are empty
-                print(form.errors)
+            if form.is_valid():  # To check whether the fields are
                 form.save()
-                messages.success(request, "Employee details successfully updated")
+                messages.success(request, "Staff data updated successfully")
                 return redirect("employees:staff_profile", staff_id=employee.id)
-
-            else:  # If some fields are empty
-                messages.error(request, "Fill all the fields")
+            else:
+                print(form.errors)
+                messages.error(request, "Update Empty Fields")
                 return redirect("employees:staff_profile", staff_id=employee.id)
 
         except ValueError:
@@ -119,20 +124,17 @@ def edit_staff(request, staff_id):
 @login_required(login_url='/')
 def add_files(request):
     if request.method == "POST":
-        try:
-            form = DocumentForm(request.POST, request.FILES)
-            if form.is_valid:
-                print(form.errors)
-                employee = form.cleaned_data['employee']
-                new_file = form.save(commit=False)
-                new_file.employee = employee
-                new_file.save()
-                messages.success(request, "File Added Successfully")
-                return redirect("employees:staff_profile", staff_id=employee.id)
-        except ValueError:
-            employee = form.cleaned_data['employee']
+        form = DocumentForm(request.POST, request.FILES)
+        staff_id = request.POST['employee']
+        if form.is_valid():
+            form.save()
+            messages.success(request, "File Added Successfully")
+            return redirect("employees:staff_profile", staff_id=staff_id)
+        else:
+            print(form.errors)
+            staff_id = request.POST['employee']
             messages.error(request, "Data is not correct")
-            return redirect("employees:staff_profile", staff_id=employee.id)
+            return redirect("employees:staff_profile", staff_id=staff_id)
     else:
         pass
 
